@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposta de Reconstrução de Site - Amortecedores Tamura</title>
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <!-- Tema claro para combinar com o background Branco Fumaça -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css">
+
+    <style>
+        /* Novas Cores Baseadas na Solicitação */
+        :root {
+            --tamura-bg: #F5F5F5; /* Branco Fumaça */
+            --tamura-primary: #1A365D; /* Azul Escuro */
+            --tamura-secondary: #D69E2E; /* Amarelo Ouro */
+            --tamura-tertiary: #A0AEC0; /* Cinza Metálico */
+            --tamura-text: #2D3748; /* Texto escuro para contraste */
+        }
+        
+        body { background: var(--tamura-bg) !important; }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4,
+        .reveal h5,
+        .reveal h6 {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-transform: none;
+            margin-bottom: 20px;
+            color: var(--tamura-primary);
+            font-weight: 800;
+        }
+
+        .reveal {
+            color: var(--tamura-text) !important;
+        }
+
+        .reveal .progress span {
+            background-color: var(--tamura-secondary);
+        }
+
+        .reveal .controls button {
+            color: var(--tamura-primary);
+        }
+
+        .highlight-primary {
+            color: var(--tamura-primary);
+            font-weight: bold;
+        }
+
+        .highlight-secondary {
+            color: var(--tamura-secondary);
+            font-weight: bold;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .img-contain {
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            height: 45vh;
+            width: 100%;
+            object-fit: contain;
+            border: 1px solid var(--tamura-tertiary);
+        }
+
+        .img-cover {
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            height: 45vh;
+            width: 100%;
+            object-fit: contain;
+            object-position: center;
+            border: 1px solid var(--tamura-tertiary);
+        }
+
+        .img-comparativo {
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            height: 50vh;
+            width: 100%;
+            object-fit: contain;
+            object-position: center;
+            margin-bottom: 15px;
+            border: 2px solid var(--tamura-tertiary);
+        }
+
+        .bad-example {
+            border-color: #E53E3E !important; /* Borda vermelha */
+        }
+        .good-example {
+            border-color: #38A169 !important; /* Borda verde */
+        }
+
+        .price-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 8px solid var(--tamura-primary);
+            margin: 20px 0;
+            text-align: left;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            color: var(--tamura-text);
+        }
+
+        .price-box ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .price-box ul li {
+            margin-bottom: 12px;
+            font-size: 1em;
+            border-bottom: 1px solid var(--tamura-bg);
+            padding-bottom: 8px;
+        }
+
+        .text-small {
+            font-size: 0.65em !important;
+            opacity: 0.9;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+        
+        .box-contrast {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+
+        /* Select Form */
+        select option {
+            background: white;
+            color: var(--tamura-text);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- 1. Capa -->
+            <section>
+                <h2>Proposta de Reconstrução Digital</h2>
+                <h1 class="highlight-primary" style="font-size: 2.2em; margin-bottom: 20px;">Amortecedores Tamura</h1>
+                <p style="font-size: 0.9em; opacity: 0.8;">Elevando a sua presença online para atrair mais clientes e gerar confiança.</p>
+            </section>
+
+            <!-- 2. Novo Slide: A Importância da Atualização -->
+            <section>
+                <h2 class="highlight-secondary">A Importância de um Site Atualizado</h2>
+                <p style="margin-bottom: 30px;">O mercado automotivo mudou. A primeira impressão da sua oficina agora é <strong>digital</strong>.</p>
+                <div class="grid-2">
+                    <div class="box-contrast" style="border-left: 5px solid var(--tamura-tertiary);">
+                        <h4 style="color: var(--tamura-primary); font-size: 1em;">Concorrência</h4>
+                        <p class="text-small" style="text-align: left;">Oficinas modernas já captam clientes ativamente pelo celular, garantindo agenda cheia através de uma navegação fluida.</p>
+                    </div>
+                    <div class="box-contrast" style="border-left: 5px solid var(--tamura-secondary);">
+                        <h4 style="color: var(--tamura-primary); font-size: 1em;">Confiança</h4>
+                        <p class="text-small" style="text-align: left;">Um site que passa segurança técnica e profissionalismo eleva o valor percebido do seu serviço. O cliente não discute o preço.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. O Problema (Cenário Atual) -->
+            <section>
+                <h2 style="color: #E53E3E;">O Problema: Cenário Atual</h2>
+                <p>Falhas críticas que fazem a oficina <strong>perder dinheiro diariamente</strong>.</p>
+                <div class="grid-2" style="margin-top: 30px; grid-template-columns: 1.2fr 1fr;">
+                    <div>
+                        <img src="../evidencias_tamura/responsividade_padrão.png" class="img-cover bad-example" alt="Falhas atuais no site da Tamura">
+                    </div>
+                    <div class="box-contrast">
+                        <ul style="font-size: 0.75em; line-height: 1.6; text-align: left;">
+                            <li style="margin-bottom: 15px;"><strong>Falta de Clareza:</strong> Poluição visual que confunde o cliente, impedindo-o de encontrar o serviço desejado.</li>
+                            <li style="margin-bottom: 15px;"><strong>Design Não Responsivo:</strong> O layout quebra em celulares (onde +80% das buscas ocorrem), frustrando o usuário.</li>
+                            <li><strong>Identidade Desconexa:</strong> Cores que não transmitem a robustez e segurança técnica de uma mecânica de excelência.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. A Solução Validada (Seu Case) -->
+            <section>
+                <h2 style="color: #38A169;">A Solução Validada</h2>
+                <p>Como aplicamos este modelo na <strong>JCar Mecânica</strong> com sucesso.</p>
+                <div class="grid-2" style="margin-top: 30px; grid-template-columns: 1fr 1.2fr;">
+                    <div class="box-contrast">
+                        <ul style="font-size: 0.75em; line-height: 1.6; text-align: left;">
+                            <li style="margin-bottom: 15px;"><strong>Navegação Mobile-First:</strong> Estrutura limpa, perfeita para celulares, facilitando agendamentos em um clique.</li>
+                            <li style="margin-bottom: 15px;"><strong>Botões de Ação Imediata:</strong> Captura de clientes diretamente para o WhatsApp sem atrito.</li>
+                            <li><strong>Identidade Forte:</strong> Design que passa total profissionalismo, justificando orçamentos de maior valor.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="../evidencias_jcar/responsividade_ipad.png" class="img-cover good-example" alt="Case de Sucesso JCar">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. O Comparativo (A Ponte) -->
+            <section>
+                <h2>O Comparativo Lado a Lado</h2>
+                <div class="grid-2">
+                    <div class="box-contrast" style="background: #FFF5F5;">
+                        <h4 style="font-size: 0.9em; color: #E53E3E;">O que o cliente perde (Site Atual)</h4>
+                        <img src="../evidencias_tamura/vai_viajar.png" class="img-comparativo bad-example" alt="Tamura Antes" style="height: 40vh;">
+                        <p class="text-small" style="color: #C53030;">Falta de hierarquia, desorganização e perda de credibilidade técnica.</p>
+                    </div>
+                    <div class="box-contrast" style="background: #F0FFF4;">
+                        <h4 style="font-size: 0.9em; color: #38A169;">O que o cliente ganha (Padrão Novo)</h4>
+                        <img src="../evidencias_jcar/header.png" class="img-comparativo good-example" alt="JCar Depois" style="height: 40vh;">
+                        <p class="text-small" style="color: #276749;">Visual premium, clareza nas informações e gatilhos de conversão rápidos.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. A Proposta de Valor -->
+            <section>
+                <h2 class="highlight-primary">A Proposta de Valor</h2>
+                <p style="font-size: 1em; max-width: 80%; margin: 0 auto; line-height: 1.5;">
+                    A mudança <strong>não é apenas estética</strong>.<br><br>
+                    É a transformação do seu site em uma <strong>ferramenta ativa de vendas e captação técnica de serviços</strong>.<br><br>
+                    Vamos estruturar uma presença digital tão confiável e precisa quanto a suspensão que você entrega aos seus clientes.
+                </p>
+            </section>
+
+            <!-- 7. Protótipo Tamura (Iframe Externo) -->
+            <section data-background-iframe="prototipo.html" data-background-interactive>
+                <!-- O protótipo será carregado em background ocupando a tela inteira, totalmente interativo -->
+            </section>
+            <!-- 9. Fechamento -->
+            <section>
+                <h2>Próximos Passos?</h2>
+                <p style="font-size: 0.9em; margin-bottom: 30px;">Explore um dos nossos cases de sucesso por si mesmo e
+                    veja a qualidade e robustez que entregaremos ao seu negócio:</p>
+
+                <a href="https://jcarmecanicaautomotiva.com.br/" target="_blank"
+                    style="display:inline-block; padding: 15px 30px; background: var(--tamura-primary); color: white; border-radius: 8px; text-decoration: none; margin-top: 20px; font-weight:bold; box-shadow: 0 5px 15px rgba(26, 54, 93, 0.4); transition: transform 0.3s;"
+                    onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    Acessar jcarmecanicaautomotiva.com.br
+                </a>
+
+                <p style="margin-top:50px; font-weight: 800; color: var(--tamura-secondary); font-size: 1.2em;">Vamos conversar sobre a sua nova página?</p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            controls: true,
+            progress: true,
+            center: true,
+            width: 1200, /* Aumentado para 1200 para expandir lateralmente as imagens */
+            height: 700,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0
+        });
+
+        
+    </script>
+</body>
+
+</html>
