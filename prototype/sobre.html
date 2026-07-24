@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós - Amortecedores Tamura</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .page-header {
+            background-color: var(--bg-alt);
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .about-content {
+            padding: 80px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-content h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        @media (min-width: 768px) {
+            .mission-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .mission-card {
+            background: var(--bg-alt);
+            padding: 30px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            border-top: 4px solid var(--primary);
+        }
+
+        .mission-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">TAMURA</a>
+            <button class="hamburger" id="hamburger" aria-label="Abrir Menu">&#9776;</button>
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-item">
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+                <ul class="nav-item">
+                    <li><a href="servicos.html">Serviços</a></li>
+                </ul>
+                <ul class="nav-item">
+                    <li><a href="#">Promoções</a></li>
+                </ul>
+                <ul class="nav-item">
+                    <li><a href="#">Dicas</a></li>
+                </ul>
+                <ul class="nav-item">
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                </ul>
+                <ul class="nav-item">
+                    <li><a href="#">Contato</a></li>
+                </ul>
+                <a href="https://wa.me/551127170043" target="_blank" class="btn btn-primary">Agendar Revisão</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Nossa <span>História</span></h1>
+            <p>Tradição e excelência no mercado automotivo.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-content">
+        <h2>Tradição que passa de geração em geração</h2>
+        <p>A Amortecedores Tamura nasceu com o propósito de oferecer segurança e conforto para os motoristas de São Paulo. Ao longo dos anos, construímos uma base sólida de confiança com nossos clientes, sempre entregando serviços de alta qualidade e utilizando as melhores peças do mercado.</p>
+        <p>Nossa equipe é formada por especialistas apaixonados por mecânica, que se atualizam constantemente com as novas tecnologias automobilísticas para garantir que o seu veículo receba o melhor tratamento possível, desde um simples alinhamento até reparos complexos de suspensão.</p>
+
+        <div class="mission-grid">
+            <div class="mission-card">
+                <h3>Missão</h3>
+                <p>Garantir a segurança e o conforto dos nossos clientes através de serviços automotivos de excelência e atendimento transparente.</p>
+            </div>
+            <div class="mission-card">
+                <h3>Visão</h3>
+                <p>Ser a oficina mecânica referência em suspensão e freios na região, reconhecida pela qualidade técnica e confiança.</p>
+            </div>
+            <div class="mission-card">
+                <h3>Valores</h3>
+                <p>Transparência, qualidade técnica, respeito ao cliente, agilidade e compromisso com a segurança no trânsito.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Amortecedores Tamura</h4>
+                    <p>Av. Renata, 383 - Vila Formosa<br>São Paulo - SP</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="tel:+551127170043">(11) 2717-0043</a></li>
+                        <li><a href="mailto:contato@amortecedorestamura.com">contato@amortecedorestamura.com</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li>CNPJ: 00.000.000/0000-00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Amortecedores Tamura. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+
+# Byte-compiled / optimized / DLL files
+*/__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+.env
+.env.*
+
+.vscode/
+.idea/
+
+*.log
+
+.DS_Store
+Thumbs.db
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Coverage
+.coverage
+.coverage.*
+htmlcov/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Playwright
+playwright/.cache/
+
+*.md
+*.json
