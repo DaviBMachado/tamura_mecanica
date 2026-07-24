@@ -37,6 +37,7 @@ dist/
 
 # Playwright
 playwright/.cache/
-
-*.md
-*.json
+definicao-site-tamura.json
+context.md
+.backlogmd/z-archive/*
+.backlogmd/work/*
