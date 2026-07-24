@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+python-dotenv
+cachetools
+slowapi
+gspread
+oauth2client
+pydantic
