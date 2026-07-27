@@ -48,9 +48,10 @@ A organização das rotas e páginas foi otimizada para reduzir a redundância d
 O sistema implementa rigorosas camadas de proteção, tanto no front quanto no backend:
 
 ### Backend
-- **Proteção de Credenciais:** A API utiliza uma *Google Service Account* com escopo de leitura estritamente limitado. As chaves residem em variáveis de ambiente (`.env`) e nunca são comitadas.
+- **Proteção de Credenciais:** A API utiliza uma *Google Service Account* com escopo de leitura estritamente limitado. O arquivo `service_account.json` NUNCA deve ser commitado no repositório (protegido via `.gitignore`). Em ambiente de produção ou CI/CD, utilize a variável de ambiente `GOOGLE_CREDENTIALS_JSON` (contendo o conteúdo JSON das credenciais ou em formato Base64).
 - **Rate-Limiting contra Abuso:** Implementação do middleware `slowapi` limitando requisições por IP (ex: 10 requisições/minuto), prevenindo DDoS na rota pública.
-- **Controle de Origem (CORS):** A API bloqueia tentativas de consumo por sites terceiros, aceitando requisições somente do domínio de produção do frontend (React).
+- **Controle de Origem (CORS):** A API bloqueia tentativas de consumo por sites terceiros, aceitando requisições configuradas na variável `ALLOWED_ORIGINS` (ex: `http://localhost:5173`).
+- **Headers de Segurança & Erros:** Injeção dos cabeçalhos `X-Content-Type-Options`, `X-Frame-Options`, `Content-Security-Policy` e mascaramento de exceções internas em produção.
 - **Cache Estratégico:** Uso do `cachetools` mitigando a latência do Google e impedindo que as cotas da API de planilhas sejam esgotadas.
 
 ### Frontend
