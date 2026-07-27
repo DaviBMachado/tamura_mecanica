@@ -17,6 +17,7 @@ ENV/
 .idea/
 
 *.log
+service_account.json
 
 .DS_Store
 Thumbs.db

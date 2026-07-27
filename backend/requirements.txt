@@ -6,3 +6,6 @@ slowapi
 gspread
 oauth2client
 pydantic
+pytest
+pytest-asyncio
+httpx

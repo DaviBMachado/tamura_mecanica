@@ -2,8 +2,9 @@ import os
 import json
 import urllib.request
 from urllib.parse import urlencode
-from cachetools import cached, TTLCache
+from cachetools import TTLCache
 from dotenv import load_dotenv
+from core.logger import logger
 
 load_dotenv()
 
@@ -11,12 +12,15 @@ load_dotenv()
 cache = TTLCache(maxsize=10, ttl=21600)
 
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
-CHANNEL_ID = "UCtLRUKc2GLewDhBIfMG9K_g"
+CHANNEL_ID = os.getenv("YOUTUBE_CHANNEL_ID", "UCtLRUKc2GLewDhBIfMG9K_g")
 
-@cached(cache)
 def fetch_latest_videos():
+    if "videos" in cache:
+        logger.info("Retornando vídeos do cache local.")
+        return cache["videos"]
+
     if not YOUTUBE_API_KEY:
-        print("YOUTUBE_API_KEY não configurada no .env")
+        logger.warning("YOUTUBE_API_KEY não configurada no ambiente.")
         return []
 
     url = "https://www.googleapis.com/youtube/v3/search"
@@ -33,7 +37,7 @@ def fetch_latest_videos():
     request_url = f"{url}?{query_string}"
     
     try:
-        with urllib.request.urlopen(request_url) as response:
+        with urllib.request.urlopen(request_url, timeout=10) as response:
             data = json.loads(response.read().decode())
             videos = []
             for item in data.get("items", []):
@@ -41,7 +45,9 @@ def fetch_latest_videos():
                     "id": item["id"]["videoId"],
                     "titulo": item["snippet"]["title"]
                 })
+            cache["videos"] = videos
+            logger.info(f"Busca no YouTube API concluída: {len(videos)} vídeos obtidos.")
             return videos
     except Exception as e:
-        print(f"Erro ao acessar YouTube API: {e}")
-        return []
+        logger.error(f"Erro ao acessar YouTube API: {e}")
+        return cache.get("videos", [])
