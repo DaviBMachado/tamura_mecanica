@@ -13,9 +13,9 @@ export function Faq() {
 
       <div className="container section-padding" style={{ maxWidth: '800px', margin: '0 auto' }}>
         <div className="faq-list">
-          {faqData.map((item, index) => (
+          {faqData.map((item) => (
             <AccordionItem 
-              key={index} 
+              key={`faq-${item.pergunta.slice(0, 20)}`} 
               pergunta={item.pergunta} 
               resposta={item.resposta} 
             />

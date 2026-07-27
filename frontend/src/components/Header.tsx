@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { FaFacebook, FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
+import { COMPANY_CONFIG } from '../constants/companyConfig';
 import './Header.css';
 
 export function Header() {
@@ -51,14 +52,14 @@ export function Header() {
           </ul>
 
           <div className="social-icons">
-            <a href="#" aria-label="Facebook"><FaFacebook size={20} /></a>
-            <a href="#" aria-label="Twitter"><FaTwitter size={20} /></a>
-            <a href="#" aria-label="YouTube"><FaYoutube size={20} /></a>
-            <a href="#" aria-label="Instagram"><FaInstagram size={20} /></a>
+            <a href={COMPANY_CONFIG.socialLinks.facebook} aria-label="Facebook"><FaFacebook size={20} /></a>
+            <a href={COMPANY_CONFIG.socialLinks.twitter} aria-label="Twitter"><FaTwitter size={20} /></a>
+            <a href={COMPANY_CONFIG.socialLinks.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube size={20} /></a>
+            <a href={COMPANY_CONFIG.socialLinks.instagram} aria-label="Instagram"><FaInstagram size={20} /></a>
           </div>
 
           <a 
-            href="https://wa.me/551127170043" 
+            href={COMPANY_CONFIG.whatsappUrl} 
             target="_blank" 
             rel="noopener noreferrer" 
             className="btn btn-primary cta-btn"

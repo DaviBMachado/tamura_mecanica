@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { COMPANY_CONFIG } from '../constants/companyConfig';
 import './Contato.css';
 
 export function Contato() {
@@ -30,19 +31,19 @@ export function Contato() {
             <h2>Informações de Contato</h2>
             <div className="info-item">
               <strong>Endereço:</strong>
-              <p>Av. Renata, 383 - Vila Formosa, São Paulo - SP</p>
+              <p>{COMPANY_CONFIG.address}</p>
             </div>
             <div className="info-item">
               <strong>WhatsApp / Telefone:</strong>
-              <p><a href="tel:+551127170043">(11) 2717-0043</a></p>
+              <p><a href={COMPANY_CONFIG.whatsappUrl} target="_blank" rel="noopener noreferrer">{COMPANY_CONFIG.phone}</a></p>
             </div>
             <div className="info-item">
               <strong>E-mail:</strong>
-              <p><a href="mailto:contato@amortecedorestamura.com">contato@amortecedorestamura.com</a></p>
+              <p><a href={`mailto:${COMPANY_CONFIG.email}`}>{COMPANY_CONFIG.email}</a></p>
             </div>
             <div className="info-item">
               <strong>Horário de Funcionamento:</strong>
-              <p>Seg a Sex: 08:00 às 18:00<br/>Sábados: 08:00 às 13:00</p>
+              <p>{COMPANY_CONFIG.hours.weekdays}<br/>{COMPANY_CONFIG.hours.saturday}</p>
             </div>
 
             <h2 style={{ marginTop: '40px' }}>Perguntas Frequentes</h2>

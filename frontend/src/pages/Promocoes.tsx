@@ -1,97 +1,101 @@
-import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import { Card } from '../components/Card';
 import { FaTag, FaSpinner, FaExclamationCircle } from 'react-icons/fa';
+import { apiClient, ApiError } from '../services/apiClient';
+import { COMPANY_CONFIG } from '../constants/companyConfig';
+import { safeGetItem, safeSetItem } from '../utils/storage';
+import type { Promocao } from '../types';
+import './Promocoes.css';
 
-interface Promocao {
-  titulo: string;
-  descricao: string;
-  valor_antigo: string;
-  valor_promocional: string;
-  validade: string;
+interface ApiResponse {
   status: string;
+  data: Promocao[];
 }
 
+const fetcher = (url: string) => apiClient<ApiResponse>(url);
+
 export function Promocoes() {
-  const [promocoes, setPromocoes] = useState<Promocao[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    const fetchPromocoes = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/api/promocoes');
-        if (response.status === 429) {
-          throw new Error('rate_limit');
-        }
-        if (!response.ok) {
-          throw new Error('server_error');
-        }
-        const result = await response.json();
-        setPromocoes(result.data || []);
-        localStorage.setItem('tamura_promocoes_cache', JSON.stringify(result.data || []));
-      } catch (err: any) {
-        // Fallback para o cache local do navegador
-        const localCache = localStorage.getItem('tamura_promocoes_cache');
-        if (localCache) {
-          setPromocoes(JSON.parse(localCache));
-        } else {
-          setError('Promoções indisponíveis no momento. Tente novamente mais tarde.');
-        }
-      } finally {
-        setLoading(false);
+  const { data, error, isLoading } = useSWR('/api/promocoes', fetcher, {
+    revalidateOnFocus: true,
+    dedupingInterval: 10000,
+    onSuccess: (res) => {
+      if (res?.data) {
+        safeSetItem('tamura_promocoes_cache', res.data);
       }
-    };
+    },
+  });
 
-    fetchPromocoes();
-  }, []);
+  // Check fallback cache if error occurs
+  let displayPromocoes: Promocao[] = data?.data || [];
+  let isUsingFallback = false;
+
+  if (error && !data) {
+    const cachedData = safeGetItem<Promocao[]>('tamura_promocoes_cache', []);
+    if (cachedData.length > 0) {
+      displayPromocoes = cachedData;
+      isUsingFallback = true;
+    }
+  }
 
   const handleAgendar = () => {
-    window.open('https://wa.me/551127170043', '_blank');
+    window.open(COMPANY_CONFIG.whatsappUrl, '_blank');
+  };
+
+  const getErrorMessage = () => {
+    if (error instanceof ApiError && error.status === 429) {
+      return 'Limite de requisições excedido. Exibindo dados locais ou tente novamente em instantes.';
+    }
+    return 'Promoções indisponíveis no momento. Tente novamente mais tarde.';
   };
 
   return (
     <div className="promocoes-page">
-      <div className="page-header" style={{ backgroundColor: 'var(--bg-alt)', padding: '60px 20px', textAlign: 'center', borderBottom: '1px solid var(--border)' }}>
+      <div className="promocoes-header">
         <div className="container">
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>Nossas <span style={{ color: 'var(--primary)' }}>Promoções</span></h1>
-          <p style={{ color: '#555', fontSize: '1.1rem' }}>Ofertas exclusivas com tempo limitado.</p>
+          <h1 className="promocoes-header-title">
+            Nossas <span>Promoções</span>
+          </h1>
+          <p className="promocoes-header-subtitle">Ofertas exclusivas com tempo limitado.</p>
         </div>
       </div>
 
-      <div className="container section-padding" style={{ padding: '60px 20px', minHeight: '50vh' }}>
-        {loading && (
-          <div style={{ textAlign: 'center', color: '#555', padding: '40px' }}>
+      <div className="container promocoes-container">
+        {isLoading && (
+          <div className="promocoes-status-block">
             <FaSpinner className="spinner" style={{ animation: 'spin 1s linear infinite', fontSize: '2rem', marginBottom: '10px' }} />
             <p>Carregando ofertas diretamente da nossa planilha...</p>
             <style>{`@keyframes spin { 100% { transform: rotate(360deg); } }`}</style>
           </div>
         )}
 
-        {error && !loading && (
-          <div style={{ textAlign: 'center', color: 'var(--primary)', padding: '40px', backgroundColor: '#fff5f5', borderRadius: '8px' }}>
+        {error && !isUsingFallback && (
+          <div className="promocoes-error-block">
             <FaExclamationCircle style={{ fontSize: '2rem', marginBottom: '10px' }} />
-            <p>{error}</p>
+            <p>{getErrorMessage()}</p>
           </div>
         )}
 
-        {!loading && !error && promocoes.length === 0 && (
-          <div style={{ textAlign: 'center', color: '#555', padding: '40px' }}>
+        {!isLoading && displayPromocoes.length === 0 && !error && (
+          <div className="promocoes-status-block">
             <p>No momento não temos nenhuma promoção ativa. Fique de olho ou agende uma revisão comum!</p>
           </div>
         )}
 
-        {!loading && !error && promocoes.length > 0 && (
-          <div className="card-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '30px' }}>
-            {promocoes.map((promo, index) => (
-              <Card 
-                key={index}
-                title={promo.titulo}
-                description={promo.descricao}
-                icon={<FaTag />}
-                actionLabel="Garantir Oferta"
-                onAction={handleAgendar}
-              />
-            ))}
+        {displayPromocoes.length > 0 && (
+          <div className="promocoes-grid">
+            {displayPromocoes.map((promo) => {
+              const uniqueKey = `promo-${promo.titulo.toLowerCase().replace(/\s+/g, '-')}`;
+              return (
+                <Card 
+                  key={uniqueKey}
+                  title={promo.titulo}
+                  description={promo.descricao}
+                  icon={<FaTag />}
+                  actionLabel="Garantir Oferta"
+                  onAction={handleAgendar}
+                />
+              );
+            })}
           </div>
         )}
       </div>

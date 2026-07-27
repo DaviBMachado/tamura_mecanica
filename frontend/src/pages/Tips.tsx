@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react';
 import { YouTubeEmbed } from '../components/YouTubeEmbed';
 import { dicasViagem } from '../data/dicasData';
 import { FaCheckCircle, FaCarSide, FaSpinner } from 'react-icons/fa';
+import { apiClient } from '../services/apiClient';
+import { COMPANY_CONFIG } from '../constants/companyConfig';
+import type { Video } from '../types';
 
-interface Video {
-  id: string;
-  titulo: string;
+interface VideosResponse {
+  status: string;
+  data: Video[];
 }
 
 export function Tips() {
@@ -15,15 +18,10 @@ export function Tips() {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/dicas/videos');
-        if (response.ok) {
-          const result = await response.json();
-          setVideos(result.data || []);
-        } else {
-          console.error("Falha ao buscar vídeos.");
-        }
+        const result = await apiClient<VideosResponse>('/api/dicas/videos');
+        setVideos(result.data || []);
       } catch (err) {
-        console.error("Erro ao conectar com API de dicas.", err);
+        console.error('Erro ao conectar com API de dicas.', err);
       } finally {
         setLoading(false);
       }
@@ -58,8 +56,8 @@ export function Tips() {
               </div>
             ) : videos.length > 0 ? (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '30px' }}>
-                {videos.map((video, index) => (
-                  <div key={index} style={{ backgroundColor: 'var(--bg-alt)', padding: '15px', borderRadius: 'var(--radius-lg)' }}>
+                {videos.map((video) => (
+                  <div key={video.id} style={{ backgroundColor: 'var(--bg-alt)', padding: '15px', borderRadius: 'var(--radius-lg)' }}>
                     <YouTubeEmbed videoId={video.id} title={video.titulo} />
                     <h3 style={{ fontSize: '1.1rem', marginTop: '15px' }}>{video.titulo}</h3>
                   </div>
@@ -71,7 +69,7 @@ export function Tips() {
 
             <div style={{ marginTop: '20px', textAlign: 'center' }}>
               <a 
-                href="https://www.youtube.com/channel/UCtLRUKc2GLewDhBIfMG9K_g" 
+                href={COMPANY_CONFIG.youtubeChannelUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn btn-outline"
@@ -88,8 +86,8 @@ export function Tips() {
               <h2>Checklist: Dicas antes de Viajar</h2>
             </div>
             <ul style={{ listStyle: 'none', padding: 0 }}>
-              {dicasViagem.map((dica, index) => (
-                <li key={index} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '15px', fontSize: '1.1rem' }}>
+              {dicasViagem.map((dica) => (
+                <li key={`dica-${dica.slice(0, 15)}`} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '15px', fontSize: '1.1rem' }}>
                   <FaCheckCircle color="var(--primary)" style={{ marginTop: '4px', marginRight: '12px', flexShrink: 0 }} />
                   <span>{dica}</span>
                 </li>
